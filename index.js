@@ -1,7 +1,6 @@
 const express = require('express');
 const app = express();
 const port = 3000;
-const Blog = require('./models/blog')
 const mongoose = require('mongoose')
 const bodyParser = require('body-parser');
 const postController = require('./controllers/postController')
@@ -16,7 +15,7 @@ app.use(bodyParser.urlencoded({
 const dbURI = process.env.CONNECTION_STRING
 
 mongoose.connect(dbURI, {useUnifiedTopology: true})
-    .then((result) => console.log('connected to db'))
+    .then(() => console.log('connected to db'))
     .catch((err) => console.log(err))
 
 app.get('/', (req, res) => {

@@ -24,8 +24,7 @@
         function editEvent(event_id)
         {
             let id = event_id.getAttribute("data-edit-id")
-            let endpoint = `/post/update/${id}`
-            window.location.href = endpoint
+            window.location.href = `/post/update/${id}`
         }
         function deleteEvent(event_id)
         {

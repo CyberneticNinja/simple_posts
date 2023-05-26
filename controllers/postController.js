@@ -38,7 +38,7 @@ const updatePost = (id, req, res) => {
 
 const deletePost = (id, res) => {
     Blog.findByIdAndDelete(id)
-        .then(result => {
+        .then(() => {
             res.json({redirect: '/'})
         })
 }
@@ -51,7 +51,7 @@ const createPost = (req, res) => {
     })
 
     blog.save()
-        .then((result) => {
+        .then(() => {
             res.redirect('/');
         })
 }
