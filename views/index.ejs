@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <script src="https://cdn.tailwindcss.com"></script>
+        <title>A Simple Blog | <%= title %> </title>
+    </head>
+    <body>
+    <%- include('partials/nav') %>
+    <% if(blogs.length > 0) { %>
+        <% blogs.forEach(blog => { %>
+            <div class="text-2xl font-normal leading-normal mt-0 mb-2 text-blue-800 p-2 text-center">
+                <a href="post/<%= blog.id %>"><%= blog.title %></a>
+                <button onclick="editEvent(this)" data-edit-id  ="<%= blog.id %>" id="editBtn" class="px-4 text-green-500">edit</button>
+                <button onclick="deleteEvent(this)" data-delete-id  ="<%= blog.id %>" id="deleteBtn" class="px-4 text-red-500">delete</button>
+<!--                <button id="deleteBtn" class="px-4 text-red-500">delete</button>-->
+            </div>
+        <% }) %>
+    <% } %>
+    <script>
+
+        function editEvent(event_id)
+        {
+            let id = event_id.getAttribute("data-edit-id")
+            let endpoint = `/post/update/${id}`
+            window.location.href = endpoint
+        }
+        function deleteEvent(event_id)
+        {
+            let id = event_id.getAttribute("data-delete-id")
+            let endpoint = `/post/${id}`
+            fetch(endpoint, { method: 'DELETE'})
+                .then((result) => result.json())
+                .then((data) => window.location.href = data.redirect)
+        }
+    </script>
+    </body>
+</html>
